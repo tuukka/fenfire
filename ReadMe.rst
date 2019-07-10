@@ -18,17 +18,17 @@ Fenfire
 1. Build, run::
 
     docker-host $ docker build -t fenfire .
-    docker-host $ docker run -ti -P --name fenfire fenfire
+    docker-host $ docker run -ti -p 9922:22 --name fenfire fenfire
 
 2. Setup SSH root user::
 
-    docker-host $ docker cp .../.ssh/id_?sa.pub \
-          container:/root/.ssh/authorized_keys
+    docker-host $ cat ~/.ssh/id_?sa.pub | docker exec -i fenfire \
+        tee /root/.ssh/authorized_keys
 
 3. View example RDF::
 
-    x11-host $ ssh -X user@docker-container -p SSH_PORT
-    container $ /root/bin/fenfire /root/elvisimp.rdf
+    x11-host $ ssh -X root@localhost -p 9922 \
+        /usr/local/bin/fenfire /root/elvisimp.rdf
 
 
 

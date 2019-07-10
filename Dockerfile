@@ -6,6 +6,8 @@ FROM debian:wheezy-backports
 # Setup package manager
 ARG DEBIAN_FRONTEND=noninteractive
 ADD ./sources.list /etc/apt/sources.list
+ADD ./sources.list.backports /etc/apt/sources.list.d/backports.list
+ADD ./apt.conf.expirations /etc/apt/apt.conf.d/00snapshot
 RUN apt-get update
 
 
